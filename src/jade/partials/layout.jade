@@ -1,0 +1,30 @@
+block config
+  - var current = 'main'
+  - var pageTitle = 'DPAIT example - node, express and jade'
+  - var productName = "DPA-IT"
+
+html
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    
+    title= pageTitle
+
+    link(rel="stylesheet", href="./css/#{current}.css")
+
+  body
+
+    include nav
+
+    block header
+      include header
+
+    block main
+      // page content will come here.
+
+    include footer
+
+    script(src='vendor.bundle.js')
+    script(src='./js/#{current}.js')
+    

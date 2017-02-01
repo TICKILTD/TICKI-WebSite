@@ -1,0 +1,21 @@
+mixin navLink(link, cls, name)
+	li.__cls
+		a(
+			href=link
+		) !{name}
+
+nav#mainNav.navbar.navbar-default.navbar-fixed-top.navbar-custom
+	.container
+		.navbar-header.page-scroll
+			button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+				span.sr-only Toggle navigation
+				|  Menu 
+				i.fa.fa-bars
+			a.navbar-brand(href='#page-top') Start Bootstrap
+
+		#bs-example-navbar-collapse-1.collapse.navbar-collapse
+			ul.nav.navbar-nav.navbar-right
+				+navLink('#page-top', 'hidden', '')
+				+navLink('#portfolio', 'page-scroll', 'Portfolio')
+				+navLink('#about', 'page-scroll', 'About')
+				+navLink('#contact', 'page-scroll', 'Contact')
