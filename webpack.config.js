@@ -34,8 +34,12 @@ var SMELLY_PATH = path.resolve(__dirname, "./src/styles");
 
 module.exports = {
   entry: {
-    index: PATHS.entries + 'index.js', 
-    form: PATHS.entries + 'form.js'
+    index:          PATHS.entries + 'index.js', 
+    form:           PATHS.entries + 'form.js', 
+    dashboard:      PATHS.entries + 'dashboard.js', 
+    gettingstarted: PATHS.entries + 'gettingstarted.js', 
+    hostedpages:    PATHS.entries + 'hostedpages.js', 
+    reports:        PATHS.entries + 'reports.js'
   },
   output: {
     path: PATHS.output,
@@ -58,9 +62,9 @@ module.exports = {
     },
     loaders: [
       {
-        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file",
-        query: { name: "/fonts/[name].[ext]" },
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+|\?\d+)?$/,
+        loader: "url",
+        query: { name: "fonts/[name].[ext]" },
       },{
         test: /\.png$/,
         loader: "file?name=[name].[ext]"
@@ -110,8 +114,8 @@ module.exports = {
       filename: "vendor.bundle.js",
       minChunks: Infinity
     }),
-    jadePage('index'),
-    jadePage('form'),
+    //jadePage('index'), // Rendered dynamically
+    //jadePage('form'),  // Rendered dynamically
     new ExtractTextPlugin('css/[name].css'),
     new CopyWebpackPlugin([
       { from: 'src/images', to: 'images' }

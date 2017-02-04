@@ -1,7 +1,7 @@
 @import "~az-styles/theme/base";
 
 body 
-	font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: "Avenir Next","avenir-next-web",Avenir,"Helvetica Neue",Hevetica,sans-serif;
 	overflow-x: hidden;
 
 p 
@@ -19,10 +19,8 @@ a.active
 	outline: none;
 
 h1, h2, h3, h4, h5, h6 
-	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
-	font-weight: 700;
-
+	font-family: "Avenir Next","avenir-next-web",Avenir,"Helvetica Neue",Hevetica,sans-serif;
+	
 hr.star-light,
 hr.star-primary 
     padding: 0;
@@ -112,7 +110,7 @@ header
 @media(max-width:767px) 
 	header 
 		.header-image	
-			background-color: #2C3E50;
+			background-color: $theme-primary;
 			border-radius: 50%;
 			height: 20rem;
 			width: 20rem;
@@ -164,6 +162,37 @@ header
 					&:active 
 						color: white;
 						background: $theme-success;
+			.avatar
+				border-radius: 50%;
+				height: 50px;
+				margin-left: 10px;
+				margin-right: 10px;
+				z-index: 9000;
+				position: relative;
+
+			.dropdown-menu
+				margin-top: -11px;
+				padding: 20px 0px 20px 0px;
+
+				a
+					color: $theme-primary
+					line-height: 25px;
+					
+			.divider
+				margin-bottom: 15px;
+
+			span
+				a
+					&:hover,
+					&:focus,
+					&:active 
+						text-decoration: none;
+				
+				&.open
+					a
+						&.dropdown-toggle
+							color: $theme-success;
+							background: $theme-primary
 
 	.navbar-toggle 
 		color: white;
@@ -193,6 +222,42 @@ header
 		padding: 10px 0;
 		.navbar-brand 
 			font-size: 1.5em;
+
+#sidebar
+
+	a
+		color: rgba(0,0,0,0.86);
+		letter-spacing: .3px;
+		font-size: 13px;
+		padding-left: 0px;
+
+		&:hover, 
+		&:focus
+			background-color: transparent;
+
+		i
+			position: relative;
+			top: 1px;
+			font-size: 16px;
+			margin-right: 12px;
+			width: 17px;
+			display: inline-block;
+
+	ul
+		margin: 0;
+		padding: 0;
+		line-height: 1.4;
+		padding-left: 2px;
+		color: #5d676f;
+
+		li
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			margin-bottom: 2px;
+
+			a
+			    text-decoration: none;
 
 section 
     padding: 100px 0;
@@ -437,3 +502,33 @@ footer
 	.modal-backdrop 
 		opacity: 0;
 		display: none;
+
+.root-container
+	margin-top: 40px;
+
+.portal-header
+	margin-top: 0px;
+
+.stats
+	text-align: center;
+	font-size: 16px;
+	margin-bottom: 20px;
+	color: #666;
+		
+	span
+		display: block;
+		text-transform: uppercase;
+		font-size: 12px;
+		letter-spacing: 1px;
+
+	strong
+		color: #000;
+		font-size: 34px;
+		font-weight: 400;
+		height: 50px;
+		display: block;
+
+	small
+		opacity: .5;
+		display: block;
+		font-size: 13px;

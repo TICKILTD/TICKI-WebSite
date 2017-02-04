@@ -2,10 +2,10 @@
   "name": "multi-page-jade-webpack",
   "version": "1.0.0",
   "description": "A starting point to building multi-page websites with Jade templates.",
-  "main": "webpack.config.js",
+  "main": "server.js",
   "scripts": {
-    "start": "webpack-dev-server --port 3000 --host 0.0.0.0",
-    "build": "rm -rf dist && webpack -p"
+    "start": "node server",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js --progress --profile --colors"
   },
   "keywords": [],
   "author": "",
@@ -23,19 +23,30 @@
     "image-loader": "0.0.1",
     "jade": "^1.11.0",
     "jade-loader": "^0.8.0",
+    "node-sass": "^4.3.0",
     "postcss-loader": "^0.9.1",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-    "node-sass": "^4.3.0"
+    "webpack-hot-middleware": "^2.16.1"
   },
   "dependencies": {
+    "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
+    "cal-heatmap": "^3.6.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "dpa-it": "^1.2.9",
+    "express-session": "^1.15.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.17.1",
-    "sass-loader": "^4.1.1"
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-auth0": "^0.6.0",
+    "sass-loader": "^4.1.1",
+    "serve-favicon": "^2.3.2"
   }
 }

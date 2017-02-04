@@ -1,0 +1,39 @@
+extends layout
+
+block config
+  - var header = "Customer Portal"
+
+mixin menuLink(link, cls, name)
+  li
+    a(href=link) 
+      i.nav-link(class='bi_'+cls) 
+      span !{name}
+
+block config
+  - var current = 'portal'
+  - var pageTitle = 'TICKI - Compliant Marketing Questions'
+  - var productName = "TICKI"
+
+block main 
+  section#userportal
+    .container.root-container
+      .row
+        .hidden-xs.hidden-sm.col-xs-12.col-sm-3.col-md-2.mt-60.mt-mobile-0
+
+          aside#sidebar
+            ul.nav.flex-column
+              +menuLink('/portal', 'interface-dashboard', 'Dashboard')
+              +menuLink('/portal/gettingstarted', 'setting-airplane', 'Getting Started')
+              +menuLink('/portal/hostedpages', 'doc-profile-a', 'Hosted Pages')
+              +menuLink('/portal/reports', 'doc-papers', 'Reports')
+
+        .col-xs-10.col-md10
+          .row
+            .col-lg-12.text-left
+              h1.portal-header #{header}
+              hr
+              
+          .row
+            .col-lg-12.text-left
+
+              block portal-main

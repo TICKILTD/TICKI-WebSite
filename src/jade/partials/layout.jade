@@ -1,7 +1,7 @@
 block config
   - var current = 'main'
-  - var pageTitle = 'DPAIT example - node, express and jade'
-  - var productName = "DPA-IT"
+  - var pageTitle = 'TICKI - Compliant Marketing Questions'
+  - var productName = "TICKI"
 
 html
   head
@@ -11,20 +11,19 @@ html
     
     title= pageTitle
 
-    link(rel="stylesheet", href="./css/#{current}.css")
+    link(rel="stylesheet", href="/css/#{current}.css")
 
+    script(src="https://cdn.auth0.com/js/lock/10.3/lock.min.js")
+    
   body
 
     include nav
-
-    block header
-      include header
 
     block main
       // page content will come here.
 
     include footer
 
-    script(src='vendor.bundle.js')
-    script(src='./js/#{current}.js')
+    script(src='/vendor.bundle.js')
+    script(src='/js/#{current}.js')
     

@@ -11,7 +11,7 @@ nav#mainNav.navbar.navbar-default.navbar-fixed-top.navbar-custom
 				span.sr-only Toggle navigation
 				|  Menu 
 				i.fa.fa-bars
-			a.navbar-brand(href='#page-top') Start Bootstrap
+			a.navbar-brand(href='#page-top') TICKi
 
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav.navbar-right
@@ -19,3 +19,25 @@ nav#mainNav.navbar.navbar-default.navbar-fixed-top.navbar-custom
 				+navLink('#portfolio', 'page-scroll', 'Portfolio')
 				+navLink('#about', 'page-scroll', 'About')
 				+navLink('#contact', 'page-scroll', 'Contact')
+
+				if user
+					li.dropdown._CLS
+						span(data-toggle='dropdown')
+							img.avatar(src='#{user.picture}')
+							a.dropdown-toggle(data-toggle='dropdown') #{user.nickname}
+							i.icon-budicon-460
+							
+							ul.dropdown-menu(role='menu')
+								li.dropdown-item
+									a(role='menuitem') Some other page 1
+								li.dropdown-item
+									a(role='menuitem') Some other page 2
+								li.dropdown-item
+									a(role='menuitem') Some other page 3
+								li.dropdown-item
+									a(role='menuitem') Some other page 4
+								li.divider
+								li.dropdown-item
+									a(href='/logout', role='menuitem', onclick='javascript:window.location=\"/logout\"') Logout	
+				else
+					+navLink('login', 'page-scroll', 'Login')

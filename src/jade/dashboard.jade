@@ -1,0 +1,24 @@
+extends partials/portallayout
+
+mixin statistic(width, title, value, period)
+  div.stats(class="col-xs-" + width)
+    span #{title}
+    strong #{value}
+    small #{period}
+
+append config
+  - var current = 'dashboard'
+  - var header = 'Dashboard'
+
+block portal-main
+
+  #heat-map
+  
+  hr
+
+  .row
+    +statistic(3, 'Sites', 2, 'Last 30 days')
+    +statistic(3, 'Submissions', 543, 'Last 30 days')
+    +statistic(3, 'Accept Marketing', '42.3%', 'All time')
+    +statistic(3, 'Altered Choices', 5, 'Last 7 days')
+  
