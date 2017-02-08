@@ -39,7 +39,8 @@ module.exports = {
     dashboard:      PATHS.entries + 'dashboard.js', 
     gettingstarted: PATHS.entries + 'gettingstarted.js', 
     hostedpages:    PATHS.entries + 'hostedpages.js', 
-    reports:        PATHS.entries + 'reports.js'
+    reports:        PATHS.entries + 'reports.js', 
+    submission:     PATHS.entries + 'submission.js'
   },
   output: {
     path: PATHS.output,

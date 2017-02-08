@@ -71,8 +71,8 @@ if (isDeveloping) {
       colors: true,
       hash: false,
       timings: true,
-      chunks: true,
-      chunkModules: true,
+      chunks: false,
+      chunkModules: false,
       modules: true
     }
   });

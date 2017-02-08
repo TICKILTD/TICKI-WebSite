@@ -1,0 +1,50 @@
+
+html
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    
+    title= pageTitle
+
+    link(rel="stylesheet", href="/css/submission.css")
+
+    script(src="https://cdn.auth0.com/js/lock/10.3/lock.min.js")
+
+    style.
+      #{page.style}
+
+  body.submission
+
+  header.cus-banner
+    .container
+      .row
+        .col-lg-12
+          div
+            img.img-responsive.cus-headerimage(src='#{page.imageUrl}', alt='')
+          .intro-text.cus-headertext
+            span.name #{page.companyName}
+
+  section.cus-body
+    .container
+      .row
+        .col-lg-12.text-center
+          h2 #{page.greating}
+          p.
+            #{page.text}
+
+          p.
+            This page enabled you to change the answers that you gave.
+
+          hr
+
+      .row
+        .col-md-6.col-md-offset-2(style='background-color:#FFFFFF; font-size:20px;')
+          .text-left#tiki-container
+
+      .row
+        .form-group.col-xs-12
+          button.btn.btn-success.btn-lg(type='submit') Send
+
+    script(src='/vendor.bundle.js')
+    script(src='/js/submission.js')

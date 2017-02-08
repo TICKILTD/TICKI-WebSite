@@ -8,7 +8,7 @@ router.get('/', ensureLoggedIn, function(req, res, next) {
 });
 
 router.get('/hostedpages', ensureLoggedIn, function(req, res, next) {
-  res.render('hostedpages', { user: req.user });
+  res.render('hostedpages', { user: req.user, env : { domain: 'localhost:3000', clientid: 'GHYT-32423432-KJHKJHK-123123123-JHG' } });
 });
 
 router.get('/gettingstarted', ensureLoggedIn, function(req, res, next) {

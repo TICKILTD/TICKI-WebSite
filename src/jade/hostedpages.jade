@@ -4,16 +4,99 @@ append config
   - var current = 'hostedpages'
   - var header = 'Hosted Pages'
 
+block head
+  style.
+    iframe {
+      width: 1108px;
+      height: 710px;
+      -webkit-transform: scale(0.25);
+      -moz-transform: scale(0.25);
+      -o-transform: scale(0.25);
+      transform: scale(0.85);
+      position: absolute;
+      left: -67px;
+      top: 0px;
+      display:none;
+    }
+
+    .code-editor {
+      height:400px;
+    }
+
+    #preview {
+      min-height: 56rem;
+    }    
+
 block portal-main
 
   .row
     .col-xs-12
-      p
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-        | pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      ul.nav.nav-tabs
+        li.active
+          a(href="#settings", data-toggle="tab" data-bind="click: tab('settings')") Settings
+        li
+          a(href="#preview", data-toggle="tab" data-bind="click: tab('preview')") Preview
+        li
+          a(href="#instructions", data-toggle="tab" data-bind="click: tab('instructions')") Instructions
+        li.pull-right.client-id-label Client ID:
+          span #{user._json.app_metadata.tenant_id}
 
-      p
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-        | pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  .tab-content.mt-2
+    .tab-pane.fade.in.active#settings
+      
+      form.form-horizontal
+        .form-group.form-group-lg
+                
+          label.col-sm-2.control-label(for='greating') Greating
+          .col-sm-10
+              input.form-control.input-lg(type='text', data-bind='value: greating')#greating
+
+        .form-group.form-group-lg
+
+          label.col-sm-2.control-label(for='text') Text
+          .col-sm-10
+              input.form-control.input-lg(type='text', data-bind='value: text')#text
+
+        .form-group.form-group-lg
+
+          label.col-sm-2.control-label(for='returnurl') Return Url
+          .col-sm-10
+              input.form-control.input-lg(type='text', data-bind='value: returnUrl')#returnurl
+
+        .form-group.form-group-lg
+
+          label.col-sm-2.control-label(for='imageUrl') Logo image url
+          .col-sm-10
+              input.form-control.input-lg(type='text', data-bind='value: imageUrl')#imageUrl
+
+        hr
+
+        .form-group.form-group-lg
+
+          label.col-sm-2.control-label(for='code-editor') Custom style
+          .col-sm-10
+              .code-editor#code-editor
+
+    .tab-pane.fade.active#preview
+        iframe(src="http://localhost:3000/submission")
+
+    .tab-pane.fade.active#instructions
+      h3 Background
+      p.text-justified.
+        The hosted page enables your customers to review and change the answers they gave to the marketing questions they answered on your online forms when they bought your products or subscribed to your services.
+
+      p.
+        It is designed for companies that perhaps dont have an online account management facility on their web sites, as a stop gap while the ability to change the answers your customer gave is introduced onto your 
+        own account management web pages, or simply as a convenient way to provide your customers with an easy way to change the answers they originally gave - a requirement under GDPR regulations. 
+
+      p. 
+        The page itself can be customised with your own brand colours, fonts and logo. You can also change some of the text that appears on the page.
+
+      h3 Providing access to the page for your customers        
+
+      p. 
+        Simply provide the url of the hosted page to your customers either from a link in your web site or a link in emails you send. 
+
+      span.email http://#{env.domain}/submission?cid=#{env.clientid}&amp;sid=
+        strong {The ID of the submission}
+
