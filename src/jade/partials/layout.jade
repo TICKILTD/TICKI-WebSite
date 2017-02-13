@@ -26,6 +26,15 @@ html
 
     include footer
 
+    if (typeof(user) !== undefined && user != null) 
+      script.
+        user = {
+          client_id:'#{user._json.app_metadata.tenant_id};'
+        }
+    
+
     script(src='/vendor.bundle.js')
     script(src='/js/#{current}.js')
+
     
+      

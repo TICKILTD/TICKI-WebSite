@@ -583,6 +583,117 @@ footer
     color: #999;
     font-family: "Courier New",monospace;
 
+table
+	font-size: 14px;
+
+	th
+		font-weight: normal;
+
+.search-panel
+	border-radius: 3px;
+	height: 35px;
+	line-height: 35px;
+	position: relative;
+	overflow: hidden;
+	background: #f3f4f4;
+
+	.search-area
+		display: inline-block;
+		height: 35px;
+		padding-left: 10px;
+		border-radius: 3px 0 0 3px;
+		border-right: 0;
+		position: relative;
+		top: -1px;
+
+		i
+			position: relative;
+			opacity: .5;
+			top: 3px;
+			margin-right: 2px;
+
+		input
+			height: 35px;
+			width: 470px;
+			-webkit-appearance: none;
+			border: 0;
+			padding: 0;
+			background: 0;
+			outline: 0;
+
+	.search-controls
+		display: inline-block;
+		vertical-align: top;
+		background: #e6e6e6;
+		height: 35px;
+		border-radius: 0 3px 3px 0;
+
+		span
+			display: inline-block;
+			vertical-align: top;
+			background: #e6e6e6;
+			height: 35px;
+			border-radius: 0 3px 3px 0;
+
+		span.search-by
+			color: $theme-highlight
+
+		button
+			border-left: 1px solid rgba(0,0,0,0.1);
+			margin-left: -4px;
+
+		.custom-select
+			padding: 0 15px;
+			cursor: pointer;
+			width: 210px;
+			display: inline-block;
+			vertical-align: top;
+			position: relative;
+
+			i
+				position: absolute;
+				right: 8px;
+				top: 2px;
+				font-size: 13px;
+				opacity: .7;
+
+			select
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				-webkit-appearance: none;
+				border: 0;
+				padding: 0;
+				background: 0;
+				outline: 0;
+				text-transform: none;
+
+.table
+	tbody
+		ul
+			&.actions
+				margin: 0;
+				padding: 0;
+				list-style: none;
+
+				li
+					margin: 0;
+					padding: 0;
+					list-style: none;
+
+					a
+						background: #f1f1f1;
+						border-radius: 3px;
+						border-radius: 3px;
+						width: 34px;
+						display: block;
+						text-align: center;
+						cursor: pointer;
+						padding: 10px 0 4px 0;
+
 // AUTH0 customisations 
 .auth0-lock-input-companyName
 	div

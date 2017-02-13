@@ -34,6 +34,7 @@
     "webpack-hot-middleware": "^2.16.1"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
     "brace": "^0.9.1",

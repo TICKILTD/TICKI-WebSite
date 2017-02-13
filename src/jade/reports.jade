@@ -8,6 +8,67 @@ block portal-main
 
   .row
     .col-xs-12
+      ul.nav.nav-tabs
+        li.active
+          a(href="#submissions", data-toggle="tab" data-bind="click: tab('submissions')") Submissions
+        li
+          a(href="#statistics", data-toggle="tab" data-bind="click: tab('statistics')") Statistics
+        li.pull-right.client-id-label Client ID:
+          span #{user._json.app_metadata.tenant_id}
+
+  .tab-content.mt-2
+    .tab-pane.fade.in.active#submissions
+      
+      .row
+        .col-xs-12
+          form.search-panel
+            span.search-area
+              i.bi_interface-search
+              input(placeholder='Search for submissions', spellcheck='false', type='text')
+
+            span.search-controls.pull-right
+              .custom-select
+                span Search by&nbsp; 
+                span.search-by Surname
+                i.bi_interface-bottom
+                select
+                  option(value='surname') Surname
+                  option(value='externId') Our Id
+                  option(value='submissionId') Submission Id
+                  option(value='email') Email
+                  option(value='query') Query (advanced)
+
+              button(type='reset') Reset 
+                i.reset-icon
+
+      .row
+        .col-xs-12
+
+          .dataTables_wrapper(role='grid')
+            table.table.data-table.dataTable(style='table-layout:fixed')
+              thead
+                tr
+                  th(width='6%' data-column='picture')
+                  th.pointer.sortable(width='20%', data-column='firstname') First name
+                  th.pointer.sortable(width='20%', data-column='surname') Surname
+                  th.pointer.sortable(width='30%', data-column='email') Email
+                  th.pointer.sortable(width='25%', data-column='accountid') Account Id
+                  th.pointer.sortable(width='5%', data-column='hostedPageUrl') 
+
+              tbody#search-results(data-bind='foreach: results')
+                tr
+                  td
+                  td(data-bind='text: firstName')
+                  td(data-bind='text: lastName')
+                  td(data-bind='text: email')
+                  td(data-bind='text: accountId')
+                  td
+                    ul.actions
+                      li
+                        a(data-bind='attr: { href: hostedPageUrl }', target='_blank')
+                          i.bi_web-url
+
+    .tab-pane.fade.active#statistics
       p
         | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
         | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 

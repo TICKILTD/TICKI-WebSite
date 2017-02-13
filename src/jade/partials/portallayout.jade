@@ -30,7 +30,19 @@ block main
         .col-xs-10.col-md10
           .row
             .col-lg-12.text-left
-              h1.portal-header #{header}
+              h1.pull-left.portal-header #{header}
+              
+              if (user.trial && user.trial.on_trial)
+                a.pull-right
+                  if (user.trial.days_remaining > 0)
+                    i.bi_time-clock Your trial period runs out in #{user.trial.days_remaining} days. Click here to subscribe.
+                  else 
+                    if (user.trial.days_remaining == 0)
+                      i.bi_time-clock Your trial period runs out today. Click here to subscribe.
+                    else
+                      i.bi_time-clock Your trial period has ran out. Click here to subscribe
+          .row
+            .col-lg-12
               hr
               
           .row
