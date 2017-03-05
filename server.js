@@ -8,10 +8,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const config = require('./src/config');
 
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.config.js');
+const webpackkSettings = require('./webpack.config.js');
 
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
@@ -26,10 +27,10 @@ const app = express();
 
 /* Auth 0 strategy */
 var strategy = new Auth0Strategy({
-    domain:       process.env.AUTH0_DOMAIN || 'maraboustork.eu.auth0.com',
-    clientID:     process.env.AUTH0_CLIENT_ID || 'nodjIKSkAtkc3sAPMa3Swm1RQm6cvTF0',
-    clientSecret: process.env.AUTH0_CLIENT_SECRET || 'hEehBCTnzg-n85FKfOZpzHzumIG8360pBZ2bHlfC1L-vzSAE119h9thitrrb9Kv0',
-    callbackURL:  process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+    domain:       process.env.AUTH0_DOMAIN || config.auth0.domain,
+    clientID:     process.env.AUTH0_CLIENT_ID || config.auth0.clientID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET || config.auth0.clientSecret,
+    callbackURL:  process.env.AUTH0_CALLBACK_URL || config.auth0.callbackURL
   }, 
   function(accessToken, refreshToken, extraParams, profile, done) {
     return done(null, profile);
@@ -63,9 +64,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 if (isDeveloping) {
-  const compiler = webpack(config);
+  const compiler = webpack(webpackkSettings);
   const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: webpackkSettings.output.publicPath,
     contentBase: 'src',
     stats: {
       colors: true,

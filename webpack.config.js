@@ -115,11 +115,12 @@ module.exports = {
       filename: "vendor.bundle.js",
       minChunks: Infinity
     }),
-    //jadePage('index'), // Rendered dynamically
-    //jadePage('form'),  // Rendered dynamically
     new ExtractTextPlugin('css/[name].css'),
     new CopyWebpackPlugin([
       { from: 'src/images', to: 'images' }
+    ]), 
+    new CopyWebpackPlugin([
+      { from: 'lib/avenir/font', to: 'fonts' }
     ])
   ],
   postcss: function () {

@@ -4,16 +4,46 @@ append config
   - var current = 'gettingstarted'
   - var header = 'Getting Started'
 
+block head
+
+  style.
+    .vertical-text {
+      height: 20rem;
+      position: relative;
+      transform-origin: right, top;
+      -ms-transform: rotate(-90deg);
+      -ms-transform-origin: right, top;
+      -webkit-transform: rotate(-90deg);
+      -webkit-transform-origin: right, top;
+      position: absolute;
+      color: lightgrey;
+      text-align: -webkit-auto;
+      font-size: 37px;
+      font-weight: 100;
+      width: 16rem;
+      position: relative;
+      overflow: hidden;
+      margin-left: 26px;
+    }
+
 block portal-main
 
   .row
     .col-xs-12
-      p
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-        | pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      ul.nav.nav-tabs
+        li.active
+          a(href="#node_js", data-toggle="tab" data-bind="click: tab('node_js')") Node.js
+        li
+          a(href="#python", data-toggle="tab" data-bind="click: tab('python')") Python
+        li
+          a(href="#php", data-toggle="tab" data-bind="click: tab('php')") PHP
+        li.pull-right.client-id-label Client ID:
+          span #{user._json.app_metadata.tenant_id}
 
-      p
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-        | exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-        | pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  .tab-content.mt-2
+    .tab-pane.fade.in.active#node_js
+
+      include gettingstarted_nodejs
+
+    .tab-pane.fade.active#Python
+    .tab-pane.fade.active#PHP

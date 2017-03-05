@@ -1,0 +1,216 @@
+h1 Node.js
+
+p.
+  You can get started by either downloading the seed project or if you would like to add Ticki to an existing application you can follow the tutorial steps.
+
++sampleProject('TICKI-examples-node.express.jade')
+
+h3 Dependencies
+
+p
+  | Your code has has a dependency on the Ticki package and is available from 
+  code npm
+  | . You should add the dependency to your projects
+  code package.json
+  | as per the sample.
+
+p 
+  | Run the following command to install the required packages.
+
+pre
+  code.language-bash.hljs npm install -save ticki
+
+h3 Add Ticki references
+
+p
+  | If you are using an ECMAScript 6 (ES6) transpiler like 
+  a(href='https://babeljs.io/', target='_blank') Babel  
+  | or 
+  a(href='https://webpack.github.io/', target='_blank') Webpack 
+  | (as in the downloadable example project) then you should import the Ticki library.
+  | Locate a suitable script block or file linked to the form you want to include the Ticki questions on and import our component as follows:
+
+pre
+  code.language-js.hljs.
+    import ticki from "ticki";
+
+p
+  | Alternatively if you are using 
+  a(href='http://requirejs.org/', target='_blank') RequireJS 
+  | you should import the Ticki component as follows:
+
+pre
+  code.language-js.hljs.
+    var ticki = Require("ticki");
+
+p
+  | Remeber, It is not normally recommended that you reference npm libraries within your 
+  code node_modules
+  |  folder directly. The example above uses 
+  a(href='https://webpack.github.io/', target='_blank') Webpack 
+  | to package and copy the libraries that are referenced within the code to a different location ready to be deployed. 
+  | Other solutions that can be used to achieve the same thing include 
+  a(href='http://gruntjs.com') Grunt 
+  | and 
+  a(href='http://gulpjs.com') Gulp
+  | , or as a last resort you can copy the necessary files into your deployed script folder manually.
+
+p
+  | If you are not using RequireJS you will need to reference the script files manually. To do this you will need to reference the Ticki script file
+  | within the HEAD of your page. 
+
+pre
+  code.language-html.hljs
+    | &lt;HEAD&gt;
+    |  &lt;script async="" type="text/javascript" charset="UTF-8" src="{INSERT_YOUR_LIB_PATH}/Ticki/app.min.js"&gt;&lt;/script&gt;
+    | &lt;/HEAD&gt;
+
+h3 Initialise with your client id
+
+p
+  | Your client id is 
+  code #{user._json.app_metadata.tenant_id}
+  | and is used to identify you and the customers who complete your online forms.
+
+p
+  | To start using Ticki you must first initialise our componetn by providing this client ID as follows. 
+
+pre
+  code.language-js.hljs.javascript.
+    $(document).ready(function () {
+      // Initalise the ticki component with your client id
+      var ticki = new ticki('#{user._json.app_metadata.tenant_id}');
+    
+      // Other Ticki code will go here
+    });
+
+h3 Tell Ticki where to insert the questions
+
+p
+  | Ticki will insert the compliant questions into your form at a location of your choice, all you have to do is
+  | tell it which container to populate. 
+
+p 
+  | In the example project we have a div within our form with an id attribute of &quot;ticki-container&quot;. The css selector
+  code #ticki-container 
+  | Is therefore passed as the initial parameter in a call to the Ticki components 
+  code init 
+  | method
+
+pre
+  code.language-js.hljs.javascript.
+    $(document).ready(function () {
+      // Initalise the ticki component with your client id
+      var ticki = new ticki('#{user._json.app_metadata.tenant_id}');
+
+      // Insert the Ticki questions into the #ticki-container div
+      ticki.init('#ticki-container');
+
+      // Other Ticki code will go here
+    });
+
+p
+  | It is possibel to provide any valid CSS Selector to initialise Ticki, however it must resolve to a single container on the form. 
+  | If mulitple containers are foudno with the selector query provided only the last one will be used. 
+
+p
+  | In addition to css selectors, you can also pass a DOM element:
+
+pre
+  code.language-js.hljs.javascript.
+    ticki.init(Document.getElementById("ticki-container"));
+
+h3 Submitting the answers
+
+p
+  | There is a minimum amount of information that must be passed to us when submissing a customers answers. This includes
+
+  ul
+    li The customers first name
+    li The customers last name
+    li The customers email address
+
+p
+  | In the example we simply listen to the click event of the forms submit button to trigger a call to save the customers answers.
+  | In your system you may use KnockoutJS, React, Angular or any one of a range of alternative approaches. The key however is that 
+  | this example demonstrates how the call to save the customers answers occures within client code running on your users browser.
+  strong
+    | If you require a solution which saves the answers in server code then other examples are available that demonstrate this.
+
+pre
+  code.language-js.hljs.javascript.
+    $(document).ready(function () {
+      // Initalise the ticki component with your client id
+      var ticki = new ticki('#{user._json.app_metadata.tenant_id}');
+
+      // Insert the Ticki questions into the #ticki-container div
+      ticki.init('#ticki-container');
+
+      // Save the users answers when they click the submit button on the form
+      $('#submit').click(function(){
+
+        var submission = {
+          firstName : document.getElementById('first-name').value, 
+          lastName  : document.getElementById('last-name').value, 
+          email     : document.getElementById('email').value, 
+        };
+
+        ticki.save(submission);
+      })
+    });
+
+h3 ID's and retrieving the users answers
+
+p To be compliant with GDPR we must provide your users with the ability to review and change the answers they give to marketing questions on your site. 
+
+p 
+  | We simplify this for you by providing you with 
+  a(href='/portal/hostedpages') hosted pages 
+  | that can be changed to represent your company brand, and accessed by your customers using a URL that contains the unique and secure ID representing their answers.
+
+p 
+  | The Ticki component also enables you to provide this ability yourself, something which is especially helpful if you provide an online portal to your customers and 
+  | want to give them the ability to review and change their answers on your own web site. 
+
+p 
+  | To do this you need to have a way to provide the ID we create to represent the answers and there are two ways for you to obtain this ID.
+
+.row
+
+  .col-md-1
+    .vertical-text Option 1
+
+  .col-md-11
+
+    h4 The ID is returned to you when the answers are saved, so hold onto it.
+
+    p
+      | The second parameter of the save mathod takes a function which is executed when your users successfully submit their answers to the marketing questions. 
+      | This function includes a parameter that is the secure ID of the submission which you can use to initialise the Tikci compoment to retrieve those answers in the future.
+
+    pre
+      code.language-js.hljs.javascript.
+        ticki.save(submission, function(id) {
+          // TODO: Save the value of id to your own database for retrieval later.
+        });
+
+.row
+
+  .col-md-1
+    .vertical-text Option 2
+
+  .col-md-11
+
+    h4 Use our secure API to search for your customers answers
+
+    p
+      | A users answers can only be retrieved using the secure Id. If you are not going to store this in your own database the only way to retrieve it is
+      | via your server side code and our secure API.
+
+    pre
+      code.language-js.hljs.javascript.
+        ###################################################################################
+        ###################################################################################
+        ###################################################################################
+        ###################################################################################
+        ###################################################################################

@@ -97,6 +97,6 @@ block portal-main
       p. 
         Simply provide the url of the hosted page to your customers either from a link in your web site or a link in emails you send. 
 
-      span.email http://#{env.domain}/submission?cid=#{env.clientid}&amp;sid=
+      span.email http://#{env.domain}/submission?cid=#{user._json.app_metadata.tenant_id}&amp;sid=
         strong {The ID of the submission}
 

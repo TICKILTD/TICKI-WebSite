@@ -9,10 +9,28 @@ mixin menuLink(link, cls, name)
       i.nav-link(class='bi_'+cls) 
       span !{name}
 
+mixin sampleProject(repo)
+  .package
+    .package-content.clearfix
+      .package-information
+        h3.package-header Sample Project
+
+        p.package-description.configured.
+          Download this sample project configured with your Ticki API Keys.
+
+      .package-buttons
+        a.btn.btn-sm.btn-success(href='https://ticki.com/packages/nodeJs?clientId=' + user._json.app_metadata.tenant_id, rel='nofollow') Download
+        a.github-link(href='https://github.com/TICKILTD/' + !{repo} + '/tree/master/00-Starter-Seed', rel='nofollow') Fork on Github
+
+mixin registationLink(productid, productname, cls, icon, text)
+  a(class=cls, href='https://tiki.chargify.com/subscribe/' + productid + '/' + productname + '?reference=#{user._json.app_metadata.tenant_id}&email=#{user._json.email}&organization=#{user._json.user_metadata.companyName}&country=GB')
+    i(class="bi_" + icon) !{text}
+
+
 block config
   - var current = 'portal'
   - var pageTitle = 'TICKI - Compliant Marketing Questions'
-  - var productName = "TICKI"
+  - var productName = 'TICKI'
 
 block main 
   section#userportal
@@ -26,21 +44,26 @@ block main
               +menuLink('/portal/gettingstarted', 'setting-airplane', 'Getting Started')
               +menuLink('/portal/hostedpages', 'doc-profile-a', 'Hosted Pages')
               +menuLink('/portal/reports', 'doc-papers', 'Reports')
+              +menuLink('/portal/emails', 'com-email', 'Emails')
 
         .col-xs-10.col-md10
           .row
             .col-lg-12.text-left
               h1.pull-left.portal-header #{header}
               
-              if (user.trial && user.trial.on_trial)
-                a.pull-right
-                  if (user.trial.days_remaining > 0)
-                    i.bi_time-clock Your trial period runs out in #{user.trial.days_remaining} days. Click here to subscribe.
-                  else 
-                    if (user.trial.days_remaining == 0)
-                      i.bi_time-clock Your trial period runs out today. Click here to subscribe.
-                    else
-                      i.bi_time-clock Your trial period has ran out. Click here to subscribe
+              if (user.status && user.status.value == 'trial')
+                if (user.status.trial_days_remaining > 0)
+                  +registationLink('qzdqrz6gfrsb', 'ticki-standard', 'pull-right', 'time-clock', `Sign up within the next ${user.status.trial_days_remaining} days to get £5 off your monthly subscription.`)
+                else 
+                  if (user.status.trial_days_remaining == 0)
+                    +registationLink('qzdqrz6gfrsb', 'ticki-standard', 'pull-right', 'time-clock', `Sign up today to get £5 off your monthly subscription.`)
+                  else
+                    +registationLink('qzdqrz6gfrsb', 'ticki-standard', 'pull-right', 'time-clock', `Your trial period has ran out. Click here to subscribe`)
+              else
+                if (user.status && user.status.value == 'suspended')
+                  a.pull-right
+                    i.bi_user-password !{user.status.description}
+
           .row
             .col-lg-12
               hr

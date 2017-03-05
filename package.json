@@ -4,7 +4,7 @@
   "description": "A starting point to building multi-page websites with Jade templates.",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "set NODE_ENV=development && node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js --progress --profile --colors"
   },
   "keywords": [],
@@ -45,6 +45,7 @@
     "express-session": "^1.15.0",
     "font-awesome": "^4.7.0",
     "knockout": "^3.4.1",
+    "lodash.merge": "^4.6.0",
     "moment": "^2.17.1",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
