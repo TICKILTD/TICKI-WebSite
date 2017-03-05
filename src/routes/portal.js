@@ -12,9 +12,6 @@ router.use((req, res, next) => {
 
     var tenant_id = req.user._json.app_metadata.tenant_id;
 
-
-    console.log(config.api.tenantStatusUrl.replace(":tenant_id", tenant_id));
-
     axios
       .get(config.api.tenantStatusUrl.replace(":tenant_id", tenant_id))
       .then((response) => {
@@ -64,12 +61,43 @@ router.get('/reports', ensureLoggedIn, (req, res, next) => {
 });
 
 router.get('/signupcomplete', ensureLoggedIn, (req, res, next) => {
-  var customerid = req.query.id;
+  var customerId = req.query.id;
   var tenantId = req.query.ref;
 
-  // todo speak to the chargify api to understand if the subscription is real
-  // todo if the subscription is real then we need to set a subscribed on attribute against this tenant.
-  
+  // make sure the subscription id is valid
+  axios
+    .get(config.chargify.subscriptionUrl.replace(':subscription_id', customerId), 
+    {
+      auth: {
+        username: config.chargify.v1.key,
+        password: config.chargify.v1.password
+      },
+    })
+    .then((response) => {
+
+      if (response.data) {
+        var status = {
+          status: 'live', 
+          statusDescription: 'Subscription id ' + customerId, 
+          statusUpdatedO: new Date()
+        };
+
+        axios
+          .put(config.api.tenantStatusUrl.replace(':tenant_id', tenantId), status)
+          .then((response) => {
+            res.render('welcome', {user: req.user });
+          })
+          .catch((error) => {
+            res.render('subscription_error', { user: req.user });
+          });
+      }
+      else {
+        res.render('subscription_error', { user: req.user });
+      }
+    })
+    .catch((error) => {
+      res.render('subscription_error', { user: req.user });
+    });
 })
 
 module.exports = router;

@@ -23,7 +23,7 @@ mixin sampleProject(repo)
         a.github-link(href='https://github.com/TICKILTD/' + !{repo} + '/tree/master/00-Starter-Seed', rel='nofollow') Fork on Github
 
 mixin registationLink(productid, productname, cls, icon, text)
-  a(class=cls, href='https://tiki.chargify.com/subscribe/' + productid + '/' + productname + '?reference=#{user._json.app_metadata.tenant_id}&email=#{user._json.email}&organization=#{user._json.user_metadata.companyName}&country=GB')
+  a(class=cls, href='https://ticki.chargify.com/subscribe/' + productid + '/' + productname + '?reference=#{user._json.app_metadata.tenant_id}&email=#{user._json.email}&organization=#{user._json.user_metadata.companyName}&country=GB')
     i(class="bi_" + icon) !{text}
 
 
