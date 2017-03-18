@@ -22,4 +22,10 @@ block portal-main
 
       h3 Payment Card
 
-      iframe(scrolling='no', src='#{selfServiceUrl}')
+      if (selfServiceUrl)
+        iframe(scrolling='no', src='#{selfServiceUrl}')
+      else
+        p
+          | No payment card has been set up for your account. 
+          +registationLink('qzdqrz6gfrsb', 'ticki-standard', '', '', 'Click here to register')
+      

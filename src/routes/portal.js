@@ -24,7 +24,7 @@ router.use((req, res, next) => {
         var now = moment(new Date());
 
         if (response) {
-
+          req.user.subscriptionId = response.data.subscriptionId;
           req.user.status.value = response.data.status;
           req.user.status.description = response.data.statusDescription;
           req.user.status.updatedOn = response.data.statusUpdatedOn;
@@ -37,7 +37,7 @@ router.use((req, res, next) => {
 
         req.user.restrictedAccess = true;
         if (req.user.status.value === 'trial' || req.user.status.value === 'live') {
-          restrictedAccess = false;
+          req.user.restrictedAccess = false;
         }
         
         next()
@@ -135,6 +135,17 @@ router.get('/signupcomplete', ensureLoggedIn, (req, res, next) => {
         axios
           .put(config.api.tenantStatusUrl.replace(':tenant_id', tenantId), status)
           .then((response) => {
+
+            req.user.subscriptionId = response.data.subscriptionId;
+            req.user.status.value = response.data.status;
+            req.user.status.description = response.data.statusDescription;
+            req.user.status.updatedOn = response.data.statusUpdatedOn;
+
+            req.user.restrictedAccess = true;
+            if (req.user.status.value === 'trial' || req.user.status.value === 'live') {
+              req.user.restrictedAccess = false;
+            }
+
             res.render('welcome', {user: req.user });
           })
           .catch((error) => {
