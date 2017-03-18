@@ -5,6 +5,8 @@ module.exports = {
     clientSecret: 'hEehBCTnzg-n85FKfOZpzHzumIG8360pBZ2bHlfC1L-vzSAE119h9thitrrb9Kv0',
   }, 
   chargify : {
-    subscriptionUrl:    'https://ticki.chargify.com/subscriptions/:subscription_id.json'
+    subscriptionUrl:    'https://ticki.chargify.com/subscriptions/:subscription_id.json', 
+    selfServiceUrl:     'https://ticki.chargify.com/update_payment/:subscription_id/:token',
+    siteSharedKey :     '8Kk2V9NAxi1f4pj9I83Kw1SueFbkMQeif3gDjBySM2w', 
   }
 };

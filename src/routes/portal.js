@@ -2,6 +2,8 @@ var moment = require('moment');
 var express = require('express');
 var axios = require('axios');
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+var crypto = require('crypto-js');
+
 var router = express.Router();
 var config = require('../config');
 
@@ -17,6 +19,7 @@ router.use((req, res, next) => {
       .then((response) => {
         
         req.user.status = {};
+        req.user.tenantId = tenant_id;
 
         var now = moment(new Date());
 
@@ -30,6 +33,11 @@ router.use((req, res, next) => {
             var statusUpdatedOn = moment(response.data.statusUpdatedOn);
             req.user.status.trial_days_remaining = 30 - now.diff(statusUpdatedOn, 'days');    
           }
+        }
+
+        req.user.restrictedAccess = true;
+        if (req.user.status.value === 'trial' || req.user.status.value === 'live') {
+          restrictedAccess = false;
         }
         
         next()
@@ -60,13 +68,54 @@ router.get('/reports', ensureLoggedIn, (req, res, next) => {
   res.render('reports', { user: req.user });
 });
 
+router.get('/welcome', ensureLoggedIn, (req, res, next) => {
+  res.render('welcome', { user: req.user });
+});
+
+router.get('/account', ensureLoggedIn, (req, res, next) => {
+
+  axios
+    .get(config.api.tenantSubscriptionId.replace(':tenant_id' , req.user.tenantId), 
+    {
+      // auth: {
+      //   username: config.api.v1.key,
+      //   password: config.api.v1.password
+      // },
+    })
+    .then((response) => {
+
+      if (response.data) {
+
+        var selfServiceUrl = "";
+        var subscriptionId = response.data.subscriptionId;
+
+        if (subscriptionId) {
+        
+          var message = 'update_payment--' + subscriptionId + '--' + config.chargify.siteSharedKey;
+          var selfServiceToken = crypto.SHA1(message).toString().substring(0,10);
+          
+          selfServiceUrl = config.chargify.selfServiceUrl.replace(':subscription_id', subscriptionId).replace(":token", selfServiceToken);
+          console.log(selfServiceUrl)
+        }
+
+        res.render('account', { user: req.user, selfServiceUrl: selfServiceUrl });
+      }
+      else {
+        res.status(404).send("No tenant could be found with the specified id")
+      }
+    })
+    .catch((error) => {
+      res.render('account', { user: req.user });
+    });
+});
+
 router.get('/signupcomplete', ensureLoggedIn, (req, res, next) => {
   var customerId = req.query.id;
   var tenantId = req.query.ref;
 
   // make sure the subscription id is valid
   axios
-    .get(config.chargify.subscriptionUrl.replace(':subscription_id', customerId), 
+    .get(config.chargify.subscriptionUrl.replace(':subscription_id' , customerId), 
     {
       auth: {
         username: config.chargify.v1.key,
@@ -79,7 +128,8 @@ router.get('/signupcomplete', ensureLoggedIn, (req, res, next) => {
         var status = {
           status: 'live', 
           statusDescription: 'Subscription id ' + customerId, 
-          statusUpdatedO: new Date()
+          statusUpdatedOn: new Date(), 
+          subscriptionId: customerId
         };
 
         axios

@@ -1,0 +1,25 @@
+extends partials/portallayout
+
+append config
+  - var current = 'account'
+  - var header = 'Account Details'
+
+block head
+
+  style.
+    iframe {
+      border: none;
+      width: 100%;
+      height: 460px;
+      padding: 0px;
+      margin: 0px;
+    }
+
+block portal-main
+
+  .row
+    .col-xs-12
+
+      h3 Payment Card
+
+      iframe(scrolling='no', src='#{selfServiceUrl}')

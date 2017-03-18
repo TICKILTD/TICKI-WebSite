@@ -3,7 +3,8 @@ module.exports = {
     callbackURL:  'http://localhost:3000/callback'
   }, 
   api : {
-    tenantStatusUrl: 'http://localhost:8080/api/tenants/:tenant_id/status'
+    tenantStatusUrl: 'http://localhost:8080/api/tenants/:tenant_id/status', 
+    tenantSubscriptionId: 'http://localhost:8080/api/tenants/:tenant_id/subscription'
   }, 
   chargify : {
     v1 : {

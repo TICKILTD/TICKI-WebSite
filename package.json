@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "set NODE_ENV=development && node server",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js --progress --profile --colors"
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js --progress --profile --colors --watch"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +41,7 @@
     "cal-heatmap": "^3.6.2",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "crypto-js": "^3.1.9-1",
     "dpa-it": "^1.2.9",
     "express-session": "^1.15.0",
     "font-awesome": "^4.7.0",

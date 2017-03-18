@@ -40,7 +40,9 @@ module.exports = {
     gettingstarted: PATHS.entries + 'gettingstarted.js', 
     hostedpages:    PATHS.entries + 'hostedpages.js', 
     reports:        PATHS.entries + 'reports.js', 
-    submission:     PATHS.entries + 'submission.js'
+    submission:     PATHS.entries + 'submission.js', 
+    account:        PATHS.entries + 'account.js', 
+    welcome:        PATHS.entries + 'welcome.js'
   },
   output: {
     path: PATHS.output,
